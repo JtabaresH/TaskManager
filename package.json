@@ -11,5 +11,20 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.18"
-  }
+  },
+  "name": "exercise_2",
+  "description": "��#\u0000 \u0000T\u0000a\u0000s\u0000k\u0000M\u0000a\u0000n\u0000a\u0000g\u0000e\u0000r\u0000\r\u0000 \u0000",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JtabaresH/TaskManager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JtabaresH/TaskManager/issues"
+  },
+  "homepage": "https://github.com/JtabaresH/TaskManager#readme",
+  "keywords": []
 }
