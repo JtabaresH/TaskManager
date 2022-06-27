@@ -9,6 +9,8 @@ const tasks = db.define('tasks', {
         type: DataTypes.INTEGER
     },
     userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
         
     },
     title: {

@@ -4,6 +4,10 @@ const express = require('express')
 const { usersRouter } = require('./routes/users.routes')
 const { tasksRouter } = require('./routes/tasks.routes')
 
+// Models
+const { users } = require('./models/user.model')
+const { tasks } = require('./models/task.model')
+
 // Utils
 const { db } = require('./utils/database.util')
 
@@ -19,6 +23,10 @@ app.use('/api/v1/tasks', tasksRouter)
 db.authenticate()
 .then(() => console.log('db synced'))
 .catch(err => console.log(err));
+
+// Establish models relations
+users.hasMany(tasks)
+tasks.belongsTo(users)
 
 db.sync()
 .then(() => console.log('db create or synced'))

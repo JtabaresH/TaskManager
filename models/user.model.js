@@ -6,7 +6,7 @@ const users = db.define('users', {
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER
     },
     name:{
         type: DataTypes.STRING,
@@ -14,7 +14,8 @@ const users = db.define('users', {
     },
     email:{
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     password:{
         type: DataTypes.STRING,
