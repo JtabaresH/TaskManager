@@ -39,7 +39,17 @@ const getAllActiveUsers = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
+        const { id } = req.params
+        const { name, email } = req.body
 
+        const user = await User.findOne({ where: { id } })
+
+        await user.update({ name, email })
+
+        res.status(204).json({
+            status: 'success',
+            user
+        })
     } catch (err) {
         console.log(err)
     }
@@ -47,7 +57,17 @@ const updateUser = async (req, res) => {
 
 const disableUser = async (req, res) => {
     try {
+        const { id } = req.params
 
+        const user = await User.findOne({ where: { id } })
+        await user.update({
+            status: 'disabled'
+        })
+
+        res.status(204).json({
+            status: 'success',
+            user
+        })
     } catch (err) {
         console.log(err)
     }
