@@ -23,7 +23,15 @@ const createUser = async (req, res) => {
 
 const getAllActiveUsers = async (req, res) => {
     try {
-
+        const users = await User.findAll({
+            where: {
+                status: "active"
+            }
+        })
+        res.status(200).json({
+            status: 'success',
+            users
+        })
     } catch (err) {
         console.log(err)
     }
