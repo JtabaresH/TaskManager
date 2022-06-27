@@ -55,24 +55,31 @@ const getTaskByStatus = async (req, res) => {
 
 const updateTaskById = async (req, res) => {
     try {
-        const { id, limitDate } = req.params
-        const { status, finishDate } = req.body
+        const { id } = req.params
+        const { status, limitDate, finishDate } = req.body
 
-        const task = await Task.findOne({
-            where: {
-                id,
-                status: "active"
+        const task = await Task.findOne({ where: { id } })
+
+        if (status === "active") {
+            await task.update({
+                finishDate: new Date(),
+            })
+
+            if (limitDate.getTime() > finishDate.getTime()) {
+                await task.update({
+                    status: "completed"
+                })
+            } else if (limitDate.getTime() < finishDate.getTime()) {
+                await task.update({
+                    status: "late"
+                })
             }
-        })
 
-        await task.update({
-            finishDate: new Date(),
-            /* if (limitDate.getTime() > finishDate.getTime()) {
-                status: "completed"
-            } elseif (limitDate.getTime() < finishDate.getTime()) {
-                status: "late"
-            } */
-        })
+            res.status(204).json({
+                status: 'success',
+                task
+            })
+        }
 
     } catch (err) {
         console.log(err)
@@ -84,9 +91,9 @@ const cancelTaskById = async (req, res) => {
         const { id } = req.params
 
         const task = await Task.findOne({ where: { id } })
-        
+
         await task.update({
-            status: 'cancelled' 
+            status: 'cancelled'
         })
 
         res.status(204).json({
