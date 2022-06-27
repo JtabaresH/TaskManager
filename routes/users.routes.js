@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require('express')
 
 // Controllers
 const { createUser, getAllActiveUser, updateUser, disableUser } = require('../controllers/users.controller')
 
-const usersRouter = express.Router();
+const usersRouter = express.Router()
 
 usersRouter.post('/', createUser)
 usersRouter.get('/', getAllActiveUser)

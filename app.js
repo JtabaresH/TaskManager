@@ -33,5 +33,5 @@ db.sync()
 .catch(err => console.log(err));
 
 app.listen(4030, () => {
-    console.log('Server listening')
+    console.log('Server listening at http://localhost:4030')
 })
