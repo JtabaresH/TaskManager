@@ -1,7 +1,7 @@
 const { db, DataTypes } = require('../utils/database.util')
 
 // Create model
-const tasks = db.define('tasks', {
+const Task = db.define('tasks', {
     id: {
         primaryKey: true,
         autoIncrement: true,
@@ -11,7 +11,7 @@ const tasks = db.define('tasks', {
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        
+
     },
     title: {
         type: DataTypes.STRING,
@@ -36,4 +36,4 @@ const tasks = db.define('tasks', {
     }
 })
 
-module.exports = { tasks }
+module.exports = { Task }

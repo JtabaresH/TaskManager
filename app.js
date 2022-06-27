@@ -5,8 +5,8 @@ const { usersRouter } = require('./routes/users.routes')
 const { tasksRouter } = require('./routes/tasks.routes')
 
 // Models
-const { users } = require('./models/user.model')
-const { tasks } = require('./models/task.model')
+const { User } = require('./models/user.model')
+const { Task } = require('./models/task.model')
 
 // Utils
 const { db } = require('./utils/database.util')
@@ -25,8 +25,8 @@ db.authenticate()
 .catch(err => console.log(err));
 
 // Establish models relations
-users.hasMany(tasks)
-tasks.belongsTo(users)
+User.hasMany(Task)
+Task.belongsTo(User)
 
 db.sync()
 .then(() => console.log('db create or synced'))
