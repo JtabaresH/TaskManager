@@ -2,26 +2,26 @@ const { db, DataTypes } = require('../utils/database.util')
 
 // Create model
 const User = db.define('user', {
-    id:{
+    id: {
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
         type: DataTypes.INTEGER
     },
-    name:{
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    email:{
+    email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
-    password:{
+    password: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    status:{
+    status: {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: "active"
