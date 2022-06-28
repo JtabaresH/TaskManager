@@ -65,11 +65,11 @@ const updateTaskById = async (req, res) => {
                 finishDate: new Date(),
             })
 
-            if (limitDate.getTime() > finishDate.getTime()) {
+            if (Math.abs(finishDate - limitDate) <= 0) {
                 await task.update({
                     status: "completed"
                 })
-            } else if (limitDate.getTime() < finishDate.getTime()) {
+            } else if (Math.abs(finishDate - limitDate) > 0) {
                 await task.update({
                     status: "late"
                 })

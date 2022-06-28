@@ -21,7 +21,7 @@ app.use('/api/v1/tasks', tasksRouter)
 
 // Authenticate sync and listen server
 db.authenticate()
-.then(() => console.log('db synced'))
+.then(() => console.log('db authenticated'))
 .catch(err => console.log(err));
 
 // Establish models relations
