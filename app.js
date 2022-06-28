@@ -25,7 +25,7 @@ db.authenticate()
 .catch(err => console.log(err));
 
 // Establish models relations
-User.hasMany(Task)
+User.hasMany(Task, { foreignKey: 'userId'})
 Task.belongsTo(User)
 
 db.sync()
