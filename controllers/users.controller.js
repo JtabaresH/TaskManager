@@ -1,9 +1,12 @@
 // Model
 const { User } = require('../models/user.model')
 
+// Error handlers
+const { catchAsync } = require('../utils/catchAsync.util')
+const { appError } = require('../utils/appError.util')
+
 //Petitions
-const createUser = async (req, res) => {
-    try {
+const createUser = catchAsync(async (req, res, next) => {
         const { name, email, password } = req.body
 
         const newUser = await User.create({
@@ -16,13 +19,10 @@ const createUser = async (req, res) => {
             status: 'success',
             newUser
         })
-    } catch (err) {
-        console.log(err)
-    }
-}
+})
 
-const getAllActiveUsers = async (req, res) => {
-    try {
+const getAllActiveUsers = catchAsync(async (req, res, next) => {
+
         const users = await User.findAll({
             where: {
                 status: "active"
@@ -32,13 +32,9 @@ const getAllActiveUsers = async (req, res) => {
             status: 'success',
             users
         })
-    } catch (err) {
-        console.log(err)
-    }
-}
+})
 
-const updateUser = async (req, res) => {
-    try {
+const updateUser = catchAsync(async (req, res, next) => {
         const { id } = req.params
         const { name, email } = req.body
 
@@ -50,13 +46,9 @@ const updateUser = async (req, res) => {
             status: 'success',
             user
         })
-    } catch (err) {
-        console.log(err)
-    }
-}
+})
 
-const disableUser = async (req, res) => {
-    try {
+const disableUser = catchAsync(async (req, res, next) => {
         const { id } = req.params
 
         const user = await User.findOne({ where: { id } })
@@ -68,9 +60,6 @@ const disableUser = async (req, res) => {
             status: 'success',
             user
         })
-    } catch (err) {
-        console.log(err)
-    }
-}
+})
 
 module.exports = { createUser, getAllActiveUsers, updateUser, disableUser }

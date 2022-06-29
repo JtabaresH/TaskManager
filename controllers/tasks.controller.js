@@ -1,9 +1,12 @@
 // Model
 const { Task } = require('../models/task.model')
 
+// Error handlers
+const { catchAsync } = require('../utils/catchAsync.util')
+const { appError } = require('../utils/appError.util')
+
 // Petitions
-const createTask = async (req, res) => {
-    try {
+const createTask = catchAsync(async (req, res, next) => {
         const { title, userId, limitDate } = req.body
 
         const newTask = await Task.create({
@@ -17,25 +20,17 @@ const createTask = async (req, res) => {
             status: 'success',
             newTask
         })
-    } catch (err) {
-        console.log(err)
-    }
-}
+})
 
-const getAllTask = async (req, res) => {
-    try {
+const getAllTask = catchAsync(async (req, res, next) => {
         const tasks = await Task.findAll()
         res.status(200).json({
             status: 'success',
             tasks
         })
-    } catch (err) {
-        console.log(err)
-    }
-}
+})
 
-const getTaskByStatus = async (req, res) => {
-    try {
+const getTaskByStatus = catchAsync(async (req, res, next) => {
         const { status } = req.params
 
         const tasks = await Task.findAll({ where: { status } })
@@ -44,20 +39,14 @@ const getTaskByStatus = async (req, res) => {
             status: 'success',
             tasks
         })
-    } catch (err) {
-        console.log(err)
-    }
-}
+})
 
-const updateTaskById = async (req, res) => {
-    try {
+const updateTaskById = catchAsync(async (req, res, next) => {
         const { id } = req.params
         
         const task = await Task.findOne({ where: { id } })
         const finishDated = new Date()
         const limitDated = task.limitDate
-
-            console.log(limitDated, finishDated)
                 
             if ((finishDated.getTime() - limitDated.getTime()) < 0) {
                 await task.update({
@@ -76,14 +65,9 @@ const updateTaskById = async (req, res) => {
                 status: 'success',
                 task
             })
+})
 
-    } catch (err) {
-        console.log(err)
-    }
-}
-
-const cancelTaskById = async (req, res) => {
-    try {
+const cancelTaskById = catchAsync(async (req, res, next) => {
         const { id } = req.params
 
         const task = await Task.findOne({ where: { id } })
@@ -96,9 +80,6 @@ const cancelTaskById = async (req, res) => {
             status: 'success',
             task
         })
-    } catch (err) {
-        console.log(err)
-    }
-}
+})
 
 module.exports = { createTask, getAllTask, getTaskByStatus, updateTaskById, cancelTaskById }
