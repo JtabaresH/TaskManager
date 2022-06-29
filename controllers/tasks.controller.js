@@ -76,7 +76,7 @@ const cancelTaskById = catchAsync(async (req, res, next) => {
             status: 'cancelled'
         })
 
-        res.status(204).json({
+        res.status(201).json({
             status: 'success',
             task
         })

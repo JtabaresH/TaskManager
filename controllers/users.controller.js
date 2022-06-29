@@ -42,7 +42,7 @@ const updateUser = catchAsync(async (req, res, next) => {
 
         await user.update({ name, email })
 
-        res.status(204).json({
+        res.status(201).json({
             status: 'success',
             user
         })
@@ -56,7 +56,7 @@ const disableUser = catchAsync(async (req, res, next) => {
             status: 'disabled'
         })
 
-        res.status(204).json({
+        res.status(201).json({
             status: 'success',
             user
         })
