@@ -52,25 +52,27 @@ const getTaskByStatus = async (req, res) => {
 const updateTaskById = async (req, res) => {
     try {
         const { id } = req.params
-        const { status, limitDate, finishDate } = req.body
-
+        
         const task = await Task.findOne({ where: { id } })
+        const finishDated = new Date()
+        const limitDated = task.limitDate
 
-            await task.update({
-                finishDate: new Date(),
-            })
-
-            if (Math.abs(finishDate - limitDate) <= 0) {
+            console.log(limitDated, finishDated)
+                
+            if ((finishDated.getTime() - limitDated.getTime()) < 0) {
                 await task.update({
-                    status: "completed"
+                    finishDate: finishDated,
+                    status: "complete"
                 })
-            } else if (Math.abs(finishDate - limitDate) > 0) {
+            } else {
                 await task.update({
+                    finishDate: finishDated,
                     status: "late"
                 })
             }
 
-            res.status(204).json({
+
+            res.status(201).json({
                 status: 'success',
                 task
             })
