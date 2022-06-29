@@ -38,13 +38,9 @@ const getTaskByStatus = async (req, res) => {
     try {
         const { status } = req.params
 
-        const tasks = await Task.findAll({
-            where: {
-                status: { status }
-            }
-        })
+        const tasks = await Task.findAll({ where: { status } })
 
-        res.status(204).json({
+        res.status(201).json({
             status: 'success',
             tasks
         })
@@ -60,7 +56,6 @@ const updateTaskById = async (req, res) => {
 
         const task = await Task.findOne({ where: { id } })
 
-        if (status === "active") {
             await task.update({
                 finishDate: new Date(),
             })
@@ -79,7 +74,6 @@ const updateTaskById = async (req, res) => {
                 status: 'success',
                 task
             })
-        }
 
     } catch (err) {
         console.log(err)
