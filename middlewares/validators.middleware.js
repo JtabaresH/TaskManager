@@ -31,7 +31,9 @@ const createUserValidators = [
 const createTaskValidators = [
 	body('title').notEmpty().withMessage('Title cannot be empty'),
 	body('userId').isNumeric().withMessage('userId must be a number'),
-	body('date').isDate().withMessage('Date must be a format "%Y-%m-%d %H:%M:%S"'),
+	/* body('limitDate')
+		.not().isDate()
+		.withMessage('Date must be a format "%Y-%m-%d %H:%M:%S"'), */
 	checkResult,
 ];
 
